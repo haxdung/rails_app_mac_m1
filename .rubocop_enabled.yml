@@ -36,7 +36,7 @@ Layout/AccessModifierIndentation:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
-Layout/AlignArray:
+Layout/ArrayAlignment:
   Description: >-
                  Align the elements of an array literal if they span more than
                  one line.
@@ -44,7 +44,7 @@ Layout/AlignArray:
   Enabled: true
   VersionAdded: '0.49'
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Description: >-
                  Align the elements of a hash literal if they span more than
                  one line.
@@ -120,7 +120,7 @@ Layout/AlignHash:
     - ignore_implicit
     - ignore_explicit
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Description: >-
                  Align the parameters of a method call if they span more
                  than one line.
@@ -397,7 +397,7 @@ Layout/FirstHashElementLineBreak:
   Enabled: true
   VersionAdded: '0.49'
 
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   Description: >-
                  Checks the indentation of the first element in an array
                  literal.
@@ -423,7 +423,7 @@ Layout/IndentArray:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
-Layout/IndentAssignment:
+Layout/AssignmentIndentation:
   Description: >-
                  Checks the indentation of the first line of the
                  right-hand-side of a multi-line assignment.
@@ -433,7 +433,7 @@ Layout/IndentAssignment:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   Description: 'Checks the indentation of the first key in a hash literal.'
   Enabled: true
   VersionAdded: '0.49'
@@ -457,7 +457,7 @@ Layout/IndentHash:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Description: 'This cop checks the indentation of the here document bodies.'
   StyleGuide: '#squiggly-heredocs'
   Enabled: true
@@ -485,7 +485,7 @@ Layout/InitialIndentation:
   Enabled: true
   VersionAdded: '0.49'
 
-Layout/LeadingBlankLines:
+Layout/LeadingEmptyLines:
   Description: Check for unnecessary blank lines at the beginning of a file.
   Enabled: true
   VersionAdded: '0.57'
@@ -815,7 +815,7 @@ Layout/SpaceInsideStringInterpolation:
     - space
     - no_space
 
-Layout/Tab:
+Layout/IndentationStyle:
   Description: 'No hard tabs.'
   StyleGuide: '#spaces-indentation'
   Enabled: true
@@ -827,7 +827,7 @@ Layout/Tab:
   # replace each tab.
   IndentationWidth: ~
 
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Description: 'Checks trailing blank lines and final newline.'
   StyleGuide: '#newline-eof'
   Enabled: true
@@ -905,7 +905,7 @@ Lint/DuplicateMethods:
   Enabled: true
   VersionAdded: '0.29'
 
-Lint/DuplicatedKey:
+Lint/DuplicateHashKey:
   Description: 'Check for duplicate keys in hash literals.'
   Enabled: true
   VersionAdded: '0.34'
@@ -960,7 +960,7 @@ Lint/FormatParameterMismatch:
   Enabled: true
   VersionAdded: '0.33'
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Description: "Don't suppress exception."
   StyleGuide: '#dont-hide-exceptions'
   Enabled: true
@@ -1075,31 +1075,31 @@ Lint/ReturnInVoidContext:
   Enabled: true
   VersionAdded: '0.50'
 
-Lint/SafeNavigationChain:
-  Description: 'Do not chain ordinary method call after safe navigation operator.'
-  Enabled: true
-  VersionAdded: '0.47'
-  VersionChanged: '0.56'
-  Whitelist:
-    - present?
-    - blank?
-    - presence
-    - try
-    - try!
+# Lint/SafeNavigationChain:
+#   Description: 'Do not chain ordinary method call after safe navigation operator.'
+#   Enabled: true
+#   VersionAdded: '0.47'
+#   VersionChanged: '0.56'
+#   Whitelist:
+#     - present?
+#     - blank?
+#     - presence
+#     - try
+#     - try!
 
-Lint/SafeNavigationConsistency:
-  Description: >-
-                 Check to make sure that if safe navigation is used for a method
-                 call in an `&&` or `||` condition that safe navigation is used
-                 for all method calls on that same object.
-  Enabled: true
-  VersionAdded: '0.55'
-  Whitelist:
-    - present?
-    - blank?
-    - presence
-    - try
-    - try!
+# Lint/SafeNavigationConsistency:
+#   Description: >-
+#                  Check to make sure that if safe navigation is used for a method
+#                  call in an `&&` or `||` condition that safe navigation is used
+#                  for all method calls on that same object.
+#   Enabled: true
+#   VersionAdded: '0.55'
+#   Whitelist:
+#     - present?
+#     - blank?
+#     - presence
+#     - try
+#     - try!
 
 Lint/SafeNavigationWithEmpty:
   Description: 'Avoid `foo&.empty?` in conditionals.'
@@ -1120,7 +1120,7 @@ Lint/ShadowingOuterLocalVariable:
   Enabled: true
   VersionAdded: '0.9'
 
-Lint/StringConversionInInterpolation:
+Lint/RedundantStringCoercion:
   Description: 'Checks for Object#to_s usage in string interpolation.'
   StyleGuide: '#no-to-s'
   Enabled: true
@@ -1240,29 +1240,29 @@ Metrics/ClassLength:
   CountComments: false  # count full line comments?
   Max: 100
 
-Metrics/LineLength:
-  Description: 'Limit lines to 120 characters.'
-  StyleGuide: '#120-character-limits'
-  Enabled: true
-  VersionAdded: '0.25'
-  VersionChanged: '0.46'
-  Max: 120
-  # To make it possible to copy or click on URIs in the code, we allow lines
-  # containing a URI to be longer than Max.
-  AllowHeredoc: true
-  AllowURI: true
-  URISchemes:
-    - http
-    - https
-  # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
-  # directives like '# rubocop: enable ...' when calculating a line's length.
-  IgnoreCopDirectives: false
-  # The IgnoredPatterns option is a list of !ruby/regexp and/or string
-  # elements. Strings will be converted to Regexp objects. A line that matches
-  # any regular expression listed in this option will be ignored by LineLength.
-  IgnoredPatterns: []
-  Exclude:
-    - 'config/initializers/*'
+# Metrics/LineLength:
+#   Description: 'Limit lines to 120 characters.'
+#   StyleGuide: '#120-character-limits'
+#   Enabled: true
+#   VersionAdded: '0.25'
+#   VersionChanged: '0.46'
+#   Max: 120
+#   # To make it possible to copy or click on URIs in the code, we allow lines
+#   # containing a URI to be longer than Max.
+#   AllowHeredoc: true
+#   AllowURI: true
+#   URISchemes:
+#     - http
+#     - https
+#   # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
+#   # directives like '# rubocop: enable ...' when calculating a line's length.
+#   IgnoreCopDirectives: false
+#   # The IgnoredPatterns option is a list of !ruby/regexp and/or string
+#   # elements. Strings will be converted to Regexp objects. A line that matches
+#   # any regular expression listed in this option will be ignored by LineLength.
+#   IgnoredPatterns: []
+#   Exclude:
+#     - 'config/initializers/*'
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 15 lines of code.'
@@ -1405,13 +1405,13 @@ Naming/HeredocDelimiterCase:
     - lowercase
     - uppercase
 
-Naming/HeredocDelimiterNaming:
-  Description: 'Use descriptive heredoc delimiters.'
-  StyleGuide: '#heredoc-delimiters'
-  Enabled: true
-  VersionAdded: '0.50'
-  Blacklist:
-    - !ruby/regexp '/(^|\s)(EO[A-Z]{1}|END)(\s|$)/'
+# Naming/HeredocDelimiterNaming:
+#   Description: 'Use descriptive heredoc delimiters.'
+#   StyleGuide: '#heredoc-delimiters'
+#   Enabled: true
+#   VersionAdded: '0.50'
+#   Blacklist:
+#     - !ruby/regexp '/(^|\s)(EO[A-Z]{1}|END)(\s|$)/'
 
 Naming/MethodName:
   Description: 'Use the configured style when naming methods.'
@@ -1423,36 +1423,36 @@ Naming/MethodName:
     - snake_case
     - camelCase
 
-Naming/PredicateName:
-  Description: 'Check the names of predicate methods.'
-  StyleGuide: '#bool-methods-qmark'
-  Enabled: true
-  VersionAdded: '0.50'
-  VersionChanged: '0.51'
-  # Predicate name prefixes.
-  NamePrefix:
-    - is_
-    - has_
-    - have_
-  # Predicate name prefixes that should be removed.
-  NamePrefixBlacklist:
-    - is_
-    - has_
-    - have_
-  # Predicate names which, despite having a blacklisted prefix, or no `?`,
-  # should still be accepted
-  NameWhitelist:
-    - is_a?
-  # Method definition macros for dynamically generated methods.
-  MethodDefinitionMacros:
-    - define_method
-    - define_singleton_method
-  # Exclude Rspec specs because there is a strong convention to write spec
-  # helpers in the form of `have_something` or `be_something`.
-  Exclude:
-    - 'spec/**/*'
+# Naming/PredicateName:
+#   Description: 'Check the names of predicate methods.'
+#   StyleGuide: '#bool-methods-qmark'
+#   Enabled: true
+#   VersionAdded: '0.50'
+#   VersionChanged: '0.51'
+#   # Predicate name prefixes.
+#   NamePrefix:
+#     - is_
+#     - has_
+#     - have_
+#   # Predicate name prefixes that should be removed.
+#   NamePrefixBlacklist:
+#     - is_
+#     - has_
+#     - have_
+#   # Predicate names which, despite having a blacklisted prefix, or no `?`,
+#   # should still be accepted
+#   NameWhitelist:
+#     - is_a?
+#   # Method definition macros for dynamically generated methods.
+#   MethodDefinitionMacros:
+#     - define_method
+#     - define_singleton_method
+#   # Exclude Rspec specs because there is a strong convention to write spec
+#   # helpers in the form of `have_something` or `be_something`.
+#   Exclude:
+#     - 'spec/**/*'
 
-Naming/UncommunicativeBlockParamName:
+Naming/BlockParameterName:
   Description: >-
                 Checks for block parameter names that contain capital letters,
                 end in numbers, or do not meet a minimal length.
@@ -1466,7 +1466,7 @@ Naming/UncommunicativeBlockParamName:
   # Blacklisted names that will register an offense
   ForbiddenNames: []
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Description: >-
                 Checks for method parameter names that contain capital letters,
                 end in numbers, or do not meet a minimal length.
@@ -1510,132 +1510,6 @@ Naming/VariableNumber:
     - normalcase
     - non_integer
 
-#################### Performance ###########################
-Performance/CompareWithBlock:
-  Description: "Use `sort_by(&:foo)` instead of `sort { |a, b| a.foo <=> b.foo }`."
-  Enabled: true
-
-Performance/Count:
-  Description: >-
-                  Use `count` instead of `select...size`, `reject...size`,
-                  `select...count`, `reject...count`, `select...length`,
-                  and `reject...length`.
-  # This cop has known compatibility issues with `ActiveRecord` and other
-  # frameworks. ActiveRecord's `count` ignores the block that is passed to it.
-  # For more information, see the documentation in the cop itself.
-  # If you understand the known risk, you can disable `SafeMode`.
-  SafeMode: true
-  Enabled: true
-
-Performance/Detect:
-  Description: >-
-                  Use `detect` instead of `select.first`, `find_all.first`,
-                  `select.last`, and `find_all.last`.
-  Reference: "https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code"
-  # This cop has known compatibility issues with `ActiveRecord` and other
-  # frameworks. `ActiveRecord` does not implement a `detect` method and `find`
-  # has its own meaning. Correcting `ActiveRecord` methods with this cop
-  # should be considered unsafe.
-  SafeMode: true
-  Enabled: true
-
-Performance/FlatMap:
-  Description: >-
-                  Use `Enumerable#flat_map`
-                  instead of `Enumerable#map...Array#flatten(1)`
-                  or `Enumberable#collect..Array#flatten(1)`
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablemaparrayflatten-vs-enumerableflat_map-code'
-  Enabled: true
-  EnabledForFlattenWithoutParams: false
-  # If enabled, this cop will warn about usages of
-  # `flatten` being called without any parameters.
-  # This can be dangerous since `flat_map` will only flatten 1 level, and
-  # `flatten` without any parameters can flatten multiple levels.
-
-Performance/InefficientHashSearch:
-  Description: 'Use `key?` or `value?` instead of `keys.include?` or `values.include?`'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#hashkey-instead-of-hashkeysinclude-code'
-  Enabled: true
-  Safe: false
-
-Performance/LstripRstrip:
-  Description: 'Use `strip` instead of `lstrip.rstrip`.'
-  Enabled: true
-
-Performance/RangeInclude:
-  Description: 'Use `Range#cover?` instead of `Range#include?`.'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#cover-vs-include-code'
-  Enabled: true
-  VersionAdded: '0.36'
-  Safe: false
-
-Performance/RedundantBlockCall:
-  Description: 'Use `yield` instead of `block.call`.'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#proccall-and-block-arguments-vs-yieldcode'
-  Enabled: true
-  VersionAdded: '0.36'
-
-Performance/RedundantMatch:
-  Description: >-
-                  Use `=~` instead of `String#match` or `Regexp#match` in a context where the
-                  returned `MatchData` is not needed.
-  Enabled: true
-  VersionAdded: '0.36'
-
-Performance/RedundantMerge:
-  Description: 'Use Hash#[]=, rather than Hash#merge! with a single key-value pair.'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#hashmerge-vs-hash-code'
-  Enabled: true
-  VersionAdded: '0.36'
-  # Max number of key-value pairs to consider an offense
-  MaxKeyValuePairs: 2
-
-Performance/RedundantSortBy:
-  Description: 'Use `sort` instead of `sort_by { |x| x }`.'
-  Enabled: true
-  VersionAdded: '0.36'
-
-Performance/RegexpMatch:
-  Description: >-
-                  Use `match?` instead of `Regexp#match`, `String#match`, `Symbol#match`,
-                  `Regexp#===`, or `=~` when `MatchData` is not used.
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#regexp-vs-stringmatch-vs-string-vs-stringmatch-code-'
-  Enabled: true
-  VersionAdded: '0.47'
-
-Performance/ReverseEach:
-  Description: 'Use `reverse_each` instead of `reverse.each`.'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablereverseeach-vs-enumerablereverse_each-code'
-  Enabled: true
-  VersionAdded: '0.30'
-
-Performance/Sample:
-  Description: >-
-                  Use `sample` instead of `shuffle.first`,
-                  `shuffle.last`, and `shuffle[Integer]`.
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#arrayshufflefirst-vs-arraysample-code'
-  Enabled: true
-  VersionAdded: '0.30'
-
-Performance/Size:
-  Description: >-
-                  Use `size` instead of `count` for counting
-                  the number of elements in `Array` and `Hash`.
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#arraylength-vs-arraysize-vs-arraycount-code'
-  Enabled: true
-  VersionAdded: '0.30'
-
-Performance/UnneededSort:
-  Description: >-
-                  Use `min` instead of `sort.first`,
-                  `max_by` instead of `sort_by...last`, etc.
-  Enabled: true
-  VersionAdded: '0.55'
-
-Performance/UriDefaultParser:
-  Description: 'Use `URI::DEFAULT_PARSER` instead of `URI::Parser.new`.'
-  Enabled: true
-  VersionAdded: '0.50'
 
 ##################### Rails ##################################
 Rails:
@@ -1936,15 +1810,15 @@ Rails/ReversibleMigration:
   Include:
     - db/migrate/*.rb
 
-Rails/SafeNavigation:
-  Description: "Use Ruby's safe navigation operator (`&.`) instead of `try!`"
-  Enabled: true
-  VersionAdded: '0.43'
-  # This will convert usages of `try` to use safe navigation as well as `try!`.
-  # `try` and `try!` work slightly differently. `try!` and safe navigation will
-  # both raise a `NoMethodError` if the receiver of the method call does not
-  # implement the intended method. `try` will not raise an exception for this.
-  ConvertTry: false
+# Rails/SafeNavigation:
+#   Description: "Use Ruby's safe navigation operator (`&.`) instead of `try!`"
+#   Enabled: true
+#   VersionAdded: '0.43'
+#   # This will convert usages of `try` to use safe navigation as well as `try!`.
+#   # `try` and `try!` work slightly differently. `try!` and safe navigation will
+#   # both raise a `NoMethodError` if the receiver of the method call does not
+#   # implement the intended method. `try` will not raise an exception for this.
+#   ConvertTry: false
 
 Rails/SaveBang:
   Description: 'Identifies possible cases where Active Record save! or related should be used.'
@@ -2171,24 +2045,6 @@ Style/BlockDelimiters:
   #   collection.each do |element| puts element end
   AllowBracesOnProceduralOneLiners: false
 
-Style/BracesAroundHashParameters:
-  Description: 'Enforce braces style around hash parameters.'
-  Enabled: true
-  VersionAdded: '0.14.1'
-  VersionChanged: '0.28'
-  EnforcedStyle: no_braces
-  SupportedStyles:
-    # The `braces` style enforces braces around all method parameters that are
-    # hashes.
-    - braces
-    # The `no_braces` style checks that the last parameter doesn't have braces
-    # around it.
-    - no_braces
-    # The `context_dependent` style checks that the last parameter doesn't have
-    # braces around it, but requires braces if the second to last parameter is
-    # also a hash literal.
-    - context_dependent
-
 Style/CaseEquality:
   Description: 'Avoid explicit use of the case equality operator(===).'
   StyleGuide: '#no-case-equality'
@@ -2374,7 +2230,7 @@ Style/FrozenStringLiteralComment:
   Description: >-
                  Add the frozen_string_literal comment to the top of files
                  to help transition to frozen string literals by default.
-  Enabled: false
+  Enabled: true
   VersionAdded: '0.36'
   VersionChanged: '0.47'
   EnforcedStyle: always
@@ -2474,13 +2330,13 @@ Style/InlineComment:
   Enabled: true
   VersionAdded: '0.23'
 
-Style/IpAddresses:
-  Description: "Don't include literal IP addresses in code."
-  Enabled: false
-  VersionAdded: '0.58'
-  # Allow strings to be whitelisted
-  Whitelist:
-    - "::"
+# Style/IpAddresses:
+#   Description: "Don't include literal IP addresses in code."
+#   Enabled: false
+#   VersionAdded: '0.58'
+#   # Allow strings to be whitelisted
+#   Whitelist:
+#     - "::"
     # :: is a valid IPv6 address, but could potentially be legitimately in code
 
 Style/Lambda:
@@ -2537,11 +2393,6 @@ Style/MethodDefParentheses:
     - require_no_parentheses
     - require_no_parentheses_except_multiline
 
-Style/MethodMissingSuper:
-  Description: Checks for `method_missing` to call `super`.
-  StyleGuide: '#no-method-missing'
-  Enabled: true
-  VersionAdded: '0.56'
 
 Style/MinMax:
   Description: >-
@@ -2640,31 +2491,31 @@ Style/NegatedIf:
     - prefix
     - postfix
 
-Style/NestedParenthesizedCalls:
-  Description: >-
-                 Parenthesize method calls which are nested inside the
-                 argument list of another parenthesized method call.
-  Enabled: true
-  VersionAdded: '0.36'
-  VersionChanged: '0.50'
-  Whitelist:
-    - be
-    - be_a
-    - be_an
-    - be_between
-    - be_falsey
-    - be_kind_of
-    - be_instance_of
-    - be_truthy
-    - be_within
-    - eq
-    - eql
-    - end_with
-    - include
-    - match
-    - raise_error
-    - respond_to
-    - start_with
+# Style/NestedParenthesizedCalls:
+#   Description: >-
+#                  Parenthesize method calls which are nested inside the
+#                  argument list of another parenthesized method call.
+#   Enabled: true
+#   VersionAdded: '0.36'
+#   VersionChanged: '0.50'
+#   Whitelist:
+#     - be
+#     - be_a
+#     - be_an
+#     - be_between
+#     - be_falsey
+#     - be_kind_of
+#     - be_instance_of
+#     - be_truthy
+#     - be_within
+#     - eq
+#     - eql
+#     - end_with
+#     - include
+#     - match
+#     - raise_error
+#     - respond_to
+#     - start_with
 
 Style/NestedTernaryOperator:
   Description: 'Use one expression per branch in a ternary operator.'
@@ -2857,23 +2708,23 @@ Style/ReturnNil:
     - return_nil
   VersionAdded: '0.50'
 
-Style/SafeNavigation:
-  Description: >-
-                  This cop transforms usages of a method call safeguarded by
-                  a check for the existence of the object to
-                  safe navigation (`&.`).
-  Enabled: true
-  VersionAdded: '0.43'
-  VersionChanged: '0.56'
-  # Safe navigation may cause a statement to start returning `nil` in addition
-  # to whatever it used to return.
-  ConvertCodeThatCanStartToReturnNil: false
-  Whitelist:
-    - present?
-    - blank?
-    - presence
-    - try
-    - try!
+# Style/SafeNavigation:
+#   Description: >-
+#                   This cop transforms usages of a method call safeguarded by
+#                   a check for the existence of the object to
+#                   safe navigation (`&.`).
+#   Enabled: true
+#   VersionAdded: '0.43'
+#   VersionChanged: '0.56'
+#   # Safe navigation may cause a statement to start returning `nil` in addition
+#   # to whatever it used to return.
+#   ConvertCodeThatCanStartToReturnNil: false
+#   Whitelist:
+#     - present?
+#     - blank?
+#     - presence
+#     - try
+#     - try!
 
 Style/SelfAssignment:
   Description: >-
@@ -3075,50 +2926,50 @@ Style/TrailingUnderscoreVariable:
 
 # `TrivialAccessors` requires exact name matches and doesn't allow
 # predicated methods by default.
-Style/TrivialAccessors:
-  Description: 'Prefer attr_* methods to trivial readers/writers.'
-  StyleGuide: '#attr_family'
-  Enabled: true
-  VersionAdded: '0.9'
-  VersionChanged: '0.38'
-  # When set to `false` the cop will suggest the use of accessor methods
-  # in situations like:
-  #
-  # def name
-  #   @other_name
-  # end
-  #
-  # This way you can uncover "hidden" attributes in your code.
-  ExactNameMatch: true
-  AllowPredicates: true
-  # Allows trivial writers that don't end in an equal sign. e.g.
-  #
-  # def on_exception(action)
-  #   @on_exception=action
-  # end
-  # on_exception :restart
-  #
-  # Commonly used in DSLs
-  AllowDSLWriters: false
-  IgnoreClassMethods: false
-  Whitelist:
-    - to_ary
-    - to_a
-    - to_c
-    - to_enum
-    - to_h
-    - to_hash
-    - to_i
-    - to_int
-    - to_io
-    - to_open
-    - to_path
-    - to_proc
-    - to_r
-    - to_regexp
-    - to_str
-    - to_s
-    - to_sym
+# Style/TrivialAccessors:
+#   Description: 'Prefer attr_* methods to trivial readers/writers.'
+#   StyleGuide: '#attr_family'
+#   Enabled: true
+#   VersionAdded: '0.9'
+#   VersionChanged: '0.38'
+#   # When set to `false` the cop will suggest the use of accessor methods
+#   # in situations like:
+#   #
+#   # def name
+#   #   @other_name
+#   # end
+#   #
+#   # This way you can uncover "hidden" attributes in your code.
+#   ExactNameMatch: true
+#   AllowPredicates: true
+#   # Allows trivial writers that don't end in an equal sign. e.g.
+#   #
+#   # def on_exception(action)
+#   #   @on_exception=action
+#   # end
+#   # on_exception :restart
+#   #
+#   # Commonly used in DSLs
+#   AllowDSLWriters: false
+#   IgnoreClassMethods: false
+#   Whitelist:
+#     - to_ary
+#     - to_a
+#     - to_c
+#     - to_enum
+#     - to_h
+#     - to_hash
+#     - to_i
+#     - to_int
+#     - to_io
+#     - to_open
+#     - to_path
+#     - to_proc
+#     - to_r
+#     - to_regexp
+#     - to_str
+#     - to_s
+#     - to_sym
 
 Style/UnlessElse:
   Description: >-
@@ -3128,17 +2979,17 @@ Style/UnlessElse:
   Enabled: true
   VersionAdded: '0.9'
 
-Style/UnneededCondition:
+Style/RedundantCondition:
   Description: 'Checks for unnecessary conditional expressions.'
   Enabled: true
   VersionAdded: '0.57'
 
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Description: 'Checks for strings that are just an interpolated expression.'
   Enabled: true
   VersionAdded: '0.36'
 
-Style/UnneededPercentQ:
+Style/RedundantPercentQ:
   Description: 'Checks for %q/%Q when single quotes or double quotes would do.'
   StyleGuide: '#percent-q'
   Enabled: true

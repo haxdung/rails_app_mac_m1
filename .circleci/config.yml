@@ -50,19 +50,11 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
-      # - run:
-      #     name: RSpec
-      #     command: |
-      #       bundle exec rspec --profile 10 \
-      #                         --format progress
-      # - save_cache:
-      #     key: myapp-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      #     paths:
-      #       - vendor/bundle
       - persist_to_workspace:
           root: ~/
           paths:
             - ./myapp
+
   rubocop:
     executor: default
     steps:
@@ -72,9 +64,25 @@ jobs:
       - run:
           name: Rubocop
           command: bundle exec rubocop
-  test:
+
+  rspec:
     executor: default
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - myapp-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - myapp-
+      - configure_bundler
+      - run:
+          name: Install bundle
+          command: bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: Setup DB
+          command: bundle exec rails db:create db:schema:load --trace
       - run:
           name: RSpec
           command: |
@@ -107,11 +115,9 @@ workflows:
       - rubocop:
           requires:
             - build
-      - test:
+      - rspec:
           requires:
-            - build
             - rubocop
       - deploy:
           requires:
-            - build
-            - rubocop
+            - rspec
