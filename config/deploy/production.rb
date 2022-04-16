@@ -7,8 +7,6 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-
-
 # role-based syntax
 # ==================
 
@@ -21,8 +19,6 @@
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-
-
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
@@ -30,8 +26,6 @@
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================
@@ -62,15 +56,15 @@
 
 set :stage, :production
 set :rails_env, :production
-set :deploy_to, "/deploy/apps/rails_app_aws"
+set :deploy_to, '/deploy/apps/rails_app_aws'
 set :branch, :deploy_aws
-server "13.250.3.31",
-  user: "develop_ad",
-  roles: %w(web app db)
-  # ssh_options: {
-  #   user: "develop_ad", # overrides user setting above
-  #   keys: %w(~/.ssh/authorized_keys),
-  #   forward_agent: false,
-  #   auth_methods: %w(publickey)
-  #   # password: "please use keys"
-  # }
+server '13.250.3.31',
+       user: 'develop_ad',
+       roles: %w[web app db]
+# ssh_options: {
+#   user: "develop_ad", # overrides user setting above
+#   keys: %w(~/.ssh/authorized_keys),
+#   forward_agent: false,
+#   auth_methods: %w(publickey)
+#   # password: "please use keys"
+# }

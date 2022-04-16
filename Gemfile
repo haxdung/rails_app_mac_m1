@@ -1,21 +1,21 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.1"
+ruby '3.1.1'
 
-gem "rails", "~> 7.0.2", ">= 7.0.2.3"
-gem "sprockets-rails"
-gem "mysql2", "~> 0.5"
-gem "puma", "~> 5.0"
+gem 'mysql2', '~> 0.5'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
+gem 'sprockets-rails'
 
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-gem "dotenv-rails"
-gem "bcrypt", "~> 3.1", ">= 3.1.12"
-gem "figaro"
-gem "config"
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
+gem 'config'
+gem 'dotenv-rails'
+gem 'figaro'
+gem 'importmap-rails'
 gem 'rubocop'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -26,10 +26,10 @@ gem 'rubocop'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -39,19 +39,19 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "capistrano"
-  gem "capistrano3-puma"
-  gem "capistrano-rails", require: false
-  gem "capistrano-bundler", require: false
-  gem "capistrano-rvm"
-  gem "rspec-rails"
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm'
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -62,12 +62,12 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
-  gem "faker"
-  gem "capybara"
-  gem "database_cleaner"
-  gem "launchy"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end

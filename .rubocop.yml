@@ -1,0 +1,59 @@
+# This is rubocop configuration file for Framgia's coding style. Enabling and disabling is configured
+# in separate files. This file adds all other parameters apart from Enabled.
+
+# Put the following files into the same directory as this file.
+inherit_from:
+  - .rubocop_enabled.yml
+  - .rubocop_disabled.yml
+
+# Common configuration.
+AllCops:
+  # Include gemspec and Rakefile
+  Include:
+    - '**/*.rb'
+    - '**/*.gemspec'
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'config/initializers/*'
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/*'
+    - 'db/*'
+    - 'spec/*'
+    - 'config/*'
+    - 'config/environments/*'
+    - 'config/routes/*'
+
+Naming/FileName:
+  Exclude:
+    - '**/Rakefile'
+    - '**/Gemfile'
+
+Style/IpAddresses:
+  # The test for this cop includes strings that would cause offenses
+  Exclude:
+  - spec/rubocop/cop/style/ip_addresses_spec.rb
+
+# Trailing white space is meaningful in code examples
+Layout/TrailingWhitespace:
+  AllowInHeredoc: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Lint/InterpolationCheck:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+    - 'config/initializers/*.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
