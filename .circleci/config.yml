@@ -105,6 +105,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: ssh -o StrictHostKeyChecking=no -v $SSH_USER@$SSH_HOST "sh ./deploy.sh $CIRCLE_BRANCH"
+          # bundle exec cap production deploy
 
 
 workflows:

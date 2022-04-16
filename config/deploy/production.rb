@@ -58,13 +58,17 @@ set :stage, :production
 set :rails_env, :production
 set :deploy_to, '/deploy/apps/rails_app_aws'
 set :branch, :deploy_aws
-server '13.250.3.31',
+server '54.169.49.124',
        user: 'develop_ad',
-       roles: %w[web app db]
-# ssh_options: {
-#   user: "develop_ad", # overrides user setting above
-#   keys: %w(~/.ssh/authorized_keys),
-#   forward_agent: false,
-#   auth_methods: %w(publickey)
-#   # password: "please use keys"
-# }
+       roles: %w[web app db],
+       ssh_options: {
+         # user: "develop_ad", # overrides user setting above
+         # keys: %w(~/.ssh/authorized_keys),
+         # forward_agent: false,
+         # auth_methods: %w(publickey)
+         # password: "please use keys"
+
+         keys: [File.expand_path('/Users/hadung/Documents/coding/aws/key/rails_app_aws.cer')],
+         auth_methods: %w[publickey],
+         forward_agent: true
+       }
