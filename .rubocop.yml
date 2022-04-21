@@ -1,0 +1,118 @@
+# This is rubocop configuration file for Framgia's coding style. Enabling and disabling is configured
+# in separate files. This file adds all other parameters apart from Enabled.
+
+# Put the following files into the same directory as this file.
+inherit_from:
+  # - .rubocop_enabled.yml
+  # - .rubocop_disabled.yml
+
+# Common configuration.
+AllCops:
+  # Include gemspec and Rakefile
+  Include:
+    - '**/*.rb'
+    - '**/*.gemspec'
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'config/initializers/*'
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/*'
+    - 'db/*'
+    - 'spec/*'
+    - 'config/*'
+    - 'config/environments/*'
+    - 'config/routes/*'
+
+Naming/FileName:
+  Exclude:
+    - '**/Rakefile'
+    - '**/Gemfile'
+
+Style/IpAddresses:
+  # The test for this cop includes strings that would cause offenses
+  Exclude:
+  - spec/rubocop/cop/style/ip_addresses_spec.rb
+
+# Trailing white space is meaningful in code examples
+Layout/TrailingWhitespace:
+  AllowInHeredoc: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Lint/InterpolationCheck:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+    - 'config/initializers/*.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Style/FrozenStringLiteralComment:
+  Description: >-
+                 Add the frozen_string_literal comment to the top of files
+                 to help transition to frozen string literals by default.
+  Enabled: false
+  VersionAdded: '0.36'
+  VersionChanged: '0.47'
+  EnforcedStyle: always
+  SupportedStyles:
+    # `when_needed` will add the frozen string literal comment to files
+    # only when the `TargetRubyVersion` is set to 2.3+.
+    - when_needed
+    # `always` will always add the frozen string literal comment to a file
+    # regardless of the Ruby version or if `freeze` or `<<` are called on a
+    # string literal. If you run code against multiple versions of Ruby, it is
+    # possible that this will create errors in Ruby 2.3.0+.
+    - always
+    # `never` will enforce that the frozen string literal comment does not
+    # exist in a file.
+    - never
+  Exclude:
+    - 'db/migrate/*'
+    - 'config/**/*'
+
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Description: 'Checks style of children classes and modules.'
+  StyleGuide: '#namespace-definition'
+  # Moving from compact to nested children requires knowledge of whether the
+  # outer parent is a module or a class. Moving from nested to compact requires
+  # verification that the outer parent is defined elsewhere. Rubocop does not
+  # have the knowledge to perform either operation safely and thus requires
+  # manual oversight.
+  SafeAutoCorrect: false
+  AutoCorrect: false
+  Enabled: false
+  VersionAdded: '0.19'
+  #
+  # Basically there are two different styles:
+  #
+  # `nested` - have each child on a separate line
+  #   class Foo
+  #     class Bar
+  #     end
+  #   end
+  #
+  # `compact` - combine definitions as much as possible
+  #   class Foo::Bar
+  #   end
+  #
+  # The compact style is only forced, for classes or modules with one child.
+  EnforcedStyle: nested
+  SupportedStyles:
+    - nested
+    - compact
