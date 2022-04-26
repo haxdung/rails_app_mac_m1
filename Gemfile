@@ -16,6 +16,7 @@ gem 'importmap-rails'
 gem 'rubocop'
 gem 'stimulus-rails'
 gem 'turbo-rails'
+gem 'rack-cors'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -63,11 +64,9 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'faker'
   gem 'launchy'
-  gem 'selenium-webdriver'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

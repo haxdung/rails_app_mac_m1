@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   app:
+    platform: linux/amd64
     depends_on:
       - db
     env_file:
@@ -32,6 +33,18 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - 3310:3306
+  front:
+    build:
+      dockerfile: docker/front/Dockerfile
+    command: |
+      yarn run dev
+    volumes:
+      - ./front:/app:cached
+    ports:
+      #Host computer port: Port in Docker
+      - 8080:3000
+    depends_on:
+      - app
 volumes:
   mysql_data:
   bundle_data:

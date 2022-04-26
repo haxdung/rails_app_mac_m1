@@ -2,10 +2,6 @@ ARG RUBY_VERSION=3.1.1
 
 FROM ruby:${RUBY_VERSION}-slim-buster
 
-
-#   RUN apk add --no-cache ... gcompat
-
-
 WORKDIR /app
 
 COPY Gemfile* ./
